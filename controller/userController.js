@@ -9,6 +9,10 @@ export const create = async (req, res) => {
         if(userExist){
             return res.status(400).json({message:"User already exists"})
         }
+        const savedUser = await userData.save();
+        
+        res.status(200).json(savedUser)
+        
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
