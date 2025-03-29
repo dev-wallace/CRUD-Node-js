@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 dotenv.config();
 const PORT = process.env.PORT || 5000;
 const MONGOURL = process.env.MONGO_URL;
+import userRoute from './routes/userRoute.js';
 
 mongoose.connect(MONGOURL).then(() => {
     console.log('MongoDB connected successfully!');
@@ -20,3 +21,5 @@ mongoose.connect(MONGOURL).then(() => {
 }).catch((error)=>{
     console.error('MongoDB connection error:', error);
 })
+
+app.use('/api/user', userRoute);
