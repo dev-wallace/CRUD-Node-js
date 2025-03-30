@@ -20,7 +20,11 @@ export const create = async (req, res) => {
 
 export const fetch = async (req, res) => {
     try {
-        return res.json("Hello from fetch user controller");
+        const users = await User.find();
+        if(users.length === 0){
+            return res.status(404).json({massage:"User Not Found."})
+        }
+        res.status(200).json(users);
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }
